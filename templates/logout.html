@@ -1,10 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <style>
+    .logout-container {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .logout-container h1 {
+      color: #333;
+      font-size: 2.5em;
+    }
+    .button-link {
+      display: inline-block;
+      margin: 20px 10px;
+      padding: 10px 20px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #007BFF;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .button-link:hover {
+      background-color: #0056b3;
+    }
+    .message {
+      font-size: 1.1em;
+      margin-top: 20px;
+      color: #555;
+    }
+  </style>
+
+  <div class="logout-container">
+    <h1>You are Logged Out!!</h1>
+    <p class="message">Thank you for visiting. We hope to see you again soon!</p>
+    <a href="{% url 'home' %}" class="button-link">Go to Home</a>
+    <a href="{% url 'login' %}" class="button-link">Login Again</a>
+  </div>
+
   <form method="post" action="{% url 'logout' %}">
     {% csrf_token %}
-    <h1>You are Logged Out!!</h1>
-    <a href="{% url 'home' %}" class="button-link">Go to Home</a>
-
+    <!-- The form can be used to handle any additional logout processes if needed -->
   </form>
 {% endblock %}

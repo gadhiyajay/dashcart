@@ -1,4 +1,5 @@
 .d-flex{
+    margin-inline: -60px !important;
     padding-top: 7px;
     display: -webkit-inline-box !important;
 }
@@ -143,4 +144,89 @@ p.card-text-container{
 .mt-1, .my-1 {
     margin-right: -190px !important;
     margin-top: .25rem !important;
+}
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.row {
+    display: -webkit-box;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Category, Subcategory, and Product Styles
+.category-item, .subcategory-item, .card {
+    margin: 10px;
+    text-align: center;
+}
+
+.category-item img, .subcategory-item img, .card-img-top {
+    width: 100%;
+    height: auto;
+}
+
+.category-item p, .subcategory-item p, .card-title, .card-text {
+    margin: 10px 0;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+/* Carousel Styles */
+.carousel {
+    margin-bottom: 20px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+} 
+/* website.css */
+
+/* Custom styles for product list cards */
+.custom-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 100%;
+}
+
+.custom-card:hover {
+    transform: scale(1.05);
+}
+
+.custom-card-img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.custom-card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.custom-card-text {
+    font-size: 1rem;
+    color: #555;
+}
+/* Margin for navigation buttons */
+#product-list .btn {
+    margin: 10px 0;
 }

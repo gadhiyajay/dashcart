@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" id="subcategories">
+  <h1>{{ category.title }}</h1>
+  <div class="row">
+    {% for subcategory in subcategories %}
+      <div class="col-md-3">
+        <div class="subcategory-item">
+          <img src="{% static 'images/subcategory_placeholder.jpg' %}" alt="{{ subcategory.name }}" class="img-fluid">
+          <p>{{ subcategory.name }}</p>
+          <a href="{% url 'product_list' subcategory.id %}" class="btn btn-primary">View Products</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <a href="{% url 'category_list' %}" class="btn btn-secondary">Back to Categories</a>
+</div>
+<link type="text/css" rel="stylesheet" href="{% static 'css/website.css' %}" />
+{% endblock content %}

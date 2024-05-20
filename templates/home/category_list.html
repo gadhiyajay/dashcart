@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container" id="categories">
+    <h1 class="my-4">Categories</h1>
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 custom-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.title }}</h5>
+                        <p class="card-text">{{ category.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'add_product' %}" class="btn btn-primary">Add Product</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">View Products</a>
+</div>
+<link type="text/css" rel="stylesheet" href="{% static 'css/website.css' %}" />
+<style>
+    /* Custom styling for the cards */
+    .custom-card {
+        /* Add your custom styling here */
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-card .card-title {
+        color: #333;
+        font-weight: bold;
+    }
+
+    .custom-card .card-text {
+        color: #555;
+    }
+</style>
+{% endblock content %}

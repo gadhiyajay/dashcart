@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib import messages
-from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -9,6 +8,8 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from .forms import UserLoginForm, UserSignupForm
 from .token import account_activation_token
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 
 def login_view(request):
@@ -49,7 +50,7 @@ def signup_view(request):
             to_email = form.cleaned_data.get('email')  
             email = EmailMessage(mail_subject, message, to=[to_email])  
             email.send()  
-            return HttpResponse('Please confirm your email address to complete the registration')  
+            return render(request, 'confirm-mail.html')  
     else:  
         form = UserSignupForm()  
     return render(request, 'signup.html', {'form': form})  
@@ -57,17 +58,6 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
-
-from django.contrib.auth import get_user_model
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
-from .token import account_activation_token
-from django.contrib import messages
 
 def activate(request, uidb64, token):  
     User = get_user_model()  

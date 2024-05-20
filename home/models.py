@@ -38,5 +38,5 @@ class Products(ActivatorModel, TitleDescriptionModel):
     class Meta:
         verbose_name_plural = 'Products'
     def __str__(self):
-            return f"Name : {self.name}, Price : {self.price}, Sub-Category : {self.sub_category}, Category : {self.sub_category.category}"
+            return f"Name : {self.title}, Price : {self.price}"
     

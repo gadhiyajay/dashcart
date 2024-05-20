@@ -1,0 +1,20 @@
+body {
+    background-image: url(../img/shattered.png);
+  }
+  
+  .logo {
+    font-family: 'Peralta', cursive;
+  }
+  
+  .logo a {
+    color: rgba(0,0,0,.9);
+  }
+  
+  .logo a:hover,
+  .logo a:active {
+    text-decoration: none;
+  }
+  .mt-1, .my-1 {
+    margin-right: -190px !important;
+    margin-top: .25rem !important;
+}

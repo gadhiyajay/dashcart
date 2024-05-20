@@ -1,0 +1,58 @@
+{% load static %}
+<!-- Footer -->
+{% if user.is_superuser or user.is_staff %}
+<footer class="footer" style="margin-bottom: 0px">
+    <div class="container">
+        <div class="copyright">
+            &copy; Copyright <strong><span style="color: #01514b"></span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            Designed by <strong style="color: #01514b">Jay Gadhiya</strong><br>
+            <small>You are seeing this footer because you  are logged in as Owner.</small>
+        </div>
+    </div>
+</footer>
+{% else %}
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>We're committed to providing the best shopping experience with a wide range of products and excellent customer service.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="https://www.trootech.com/services#" target="_blank">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@trootech.com">info@trootech.com</a></li>
+                        <li><i class="fa-solid fa-phone"></i> +91 9875234610</li>
+                        <li><i class="fa-solid fa-map-marker"></i><strong> TrooTech Business Solutions.</strong><br>
+                            605, 6th Floor, B Square-I, near Neptune House, Iscon - Ambli BRTS Road, Ahmedabad, Gujarat 380058, India<br></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center">&copy; 2024 DashCart. All rights reserved. Designed by TrooTech</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endif %}
+<!-- End Footer -->
+
+<link type="text/css" rel="stylesheet" href="{% static 'css/footer.css' %}"/>

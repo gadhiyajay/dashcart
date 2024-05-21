@@ -10,6 +10,11 @@ from .forms import UserLoginForm, UserSignupForm
 from .token import account_activation_token
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.dispatch import receiver
+from .models import Profile
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User
+
 
 
 def login_view(request):
@@ -36,8 +41,16 @@ def signup_view(request):
         if form.is_valid():  
             # save form in the memory not in database  
             user = form.save(commit=False)  
-            user.is_active = False  
-            user.save()  
+            user.is_active = False  # Deactivate account till it is confirmed
+            
+            # Save the user to database
+            user.save()
+            
+            # If the user is a seller, save the GST number
+            user_profile = user.profile  # Assuming you have a profile model linked to user
+            user_profile.gst_number = form.cleaned_data.get('gst_number')
+            user_profile.save()
+            
             # to get the domain of the current site  
             current_site = get_current_site(request)  
             mail_subject = 'Activation link has been sent to your email id'  
@@ -75,3 +88,9 @@ def activate(request, uidb64, token):
     else:  
         messages.error(request, 'Activation link is invalid!')  
         return redirect('home')  # Redirect to the home page or any other appropriate page
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+    instance.profile.save()

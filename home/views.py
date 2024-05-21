@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Category, SubCategory, Products
 from django import forms
+from django.contrib.auth.decorators import login_required, user_passes_test
+
 
 # Create your views here.
 
@@ -21,6 +23,12 @@ class ProductForm(forms.ModelForm):
         model = Products
         fields = ['title', 'description', 'categories', 'price', 'stock', 'image']
 
+
+def is_seller(user):
+    return user.is_authenticated and user.userprofile.role == 'seller'
+
+@login_required
+@user_passes_test(is_seller)
 def add_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)

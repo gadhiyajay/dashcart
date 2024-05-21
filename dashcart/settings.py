@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "home",
     "users",
+    'bootstrap5',
     "widget_tweaks",
     "form_tags",
     "django_extensions",

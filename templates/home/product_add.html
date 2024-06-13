@@ -11,32 +11,48 @@
         <button type="submit" class="btn btn-success">Add Product</button>
     </form><br>
     <a href="{% url 'category_list' %}" class="btn btn-primary">View Categories</a>
-    <a href="{% url 'product_list' %}" class="btn btn-secondary">View Products</a>
+
     <br>
 </div>
 <link type="text/css" rel="stylesheet" href="{% static 'css/website.css' %}" />
 <style>
-    /* Custom CSS */
-    .my-form {
-        /* Add your form styles here */
-        margin-top: 20px;
+    h1{
+        text-align:center;
     }
+    .my-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
     .my-form .form-group {
-        /* Add styles for the form group */
         margin-bottom: 20px;
     }
+    
     .my-form label {
-        /* Add styles for labels */
         font-weight: bold;
     }
+    
     .my-form input[type="text"],
     .my-form textarea {
-        /* Add styles for text inputs and textareas */
         width: 100%;
         padding: 10px;
-        border: 1px solid #ccc;
+        border: 1px solid #ced4da;
         border-radius: 5px;
     }
-    /* Add more styles as needed */
+    
+    .my-form input[type="text"]:focus,
+    .my-form textarea:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .my-form button[type="submit"] {
+        display: block;
+        margin: 0 auto;
+    }
 </style>
 {% endblock content %}

@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #328792;
+            margin-bottom: 30px;
+        }
+
+        .cart-items, .form-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-items h2, .form-container h2 {
+            margin-bottom: 20px;
+            color: #328792;
+        }
+
+        .cart-items .product-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-items .product-image {
+            max-width: 100px;
+            height: auto;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .cart-items .product-details {
+            flex: 1;
+        }
+
+        .cart-items .product-details p {
+            margin: 5px 0;
+        }
+
+        .cart-items .quantity {
+            text-align: right;
+        }
+
+        .cart-items .total-price {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 30px;
+        }
+
+        .form-container .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-container .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-container .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container .btn-primary, .form-container .btn-secondary {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .form-container .btn-primary {
+            background-color: #328792;
+            color: #fff;
+        }
+
+        .form-container .btn-primary:hover {
+            background-color: #286f74;
+        }
+
+        .form-container .btn-secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .form-container .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Checkout</h1>
+
+    <div class="cart-items">
+        <h2>Your Cart</h2>
+        {% for item in cart_items %}
+        <div class="product-item">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}" class="product-image">
+            <div class="product-details">
+                <p><strong>{{ item.product.title }}</strong></p>
+                <p>Price: ₹{{ item.product.price }}</p>
+                <p>Quantity: {{ item.quantity }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <p class="total-price">Total Price: ₹{{ total_price }}</p>
+    </div>
+
+    <div class="form-container">
+        <h2>Select Shipping Address</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="address">Select Address</label>
+                <select name="address" class="form-control" required>
+                    {% for address in addresses %}
+                    <option value="{{ address.id }}">
+                        {{ address.get_address_type_display }}: {{ address.street_address }} {{ address.city }}, {{ address.state }} - {{ address.postal_code }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Proceed with this Address</button>
+        </form>
+        <p style="margin-top: 20px;">
+            <a href="{% url 'address_create' %}" class="btn btn-secondary">Add New Address</a>
+        </p>
+    </div>
+
+</body>
+
+</html>
+{% endblock %}

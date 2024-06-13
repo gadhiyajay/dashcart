@@ -2,42 +2,15 @@
 <!-- <div class="row"> -->
 <div class="container" id="categories">
   <div class="category-container">
-    <div class="category-item">
-      <img src="{% static "images/top_offers.jpg"%}" alt="Top Offers">
-      <p>Top Offers</p>
+      {% for subcategory in subcategories %}
+      <!-- Category Item 1 -->
+      <div class="category-item">
+          <img src="{{ subcategory.category_image.url}}" href="{% url 'subcategory_list' subcategory.id %}" alt="{{ subcategory.title }}">
+          <a href="{% url 'subcategory_list' subcategory.id %}">{{ subcategory.title }}</a>
+      </div>
+      {% endfor %}
     </div>
-    <div class="category-item">
-      <img src="{% static "images/mobile.jpg"%}" alt="Mobiles">
-      <p>Mobile Phones</p>
-    </div>
-    <div class="category-item">
-      <img src="{% static "images/tv_and_appliances.jpg"%}" alt="TV Appliances">
-      <p>TV & Appliances</p>
-    </div>
-    <div class="category-item">
-      <img src="{% static "images/electronic_products.jpg"%}" alt="Electronic Products">
-      <p>Electronics</p>
-    </div>
-    <div class="category-item">
-      <img src="{% static "images/fashion.jpg" %}" alt="Fashion">
-      <p>Fashion</p>
-    </div>
-    <div class="category-item">
-      <img src="{% static "images/beauty.jpg" %}" alt="Beauty Products">
-      <p>Beauty Products</p>
-    </div>
-    <div class="category-item">
-      <img src="{% static "images/kitchen.jpg"%}" alt="Kitchen Products">
-      <p>Kitchen Products</p>
-    </div>
-    <div class="category-item">
-      <img src="{% static "images/furniture.jpg"%}" alt="Furniture Products">
-      <p>Furniture</p>
-    </div>
-    <!-- <div class="category-item"><img src="images/travel.jpg" alt="Travel"><p>Travel</p></div><div class="category-item"><img src="images/groceries.jpg" alt="Groceries"><p>Groceries</p></div> -->
   </div>
-</div>
-</div>
 <!--    Carousel-->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" id="carousel_slide">

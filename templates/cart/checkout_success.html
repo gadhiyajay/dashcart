@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    #checkout-success {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        text-align: center;
+    }
+    #checkout-success h1 {
+        font-size: 2.5em;
+        color: #333;
+    }
+    #checkout-success p {
+        font-size: 1.2em;
+        color: #666;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    #checkout-success a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        color: #fff;
+        background-color: #007bff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    #checkout-success a:hover {
+        background-color: #0056b3;
+}
+</style>
+<div id="checkout-success">
+    <h1>Checkout Successful</h1>
+    <p>Thank you for your purchase! Your order has been placed successfully.</p>
+    <a href="{% url 'view_cart' %}">Return to Cart</a>
+    <a href="{% url 'home' %}">Home</a>
+</div>
+{% endblock %}

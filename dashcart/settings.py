@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = "django-insecure-rxh*=nufj0lwwa-al6cdz9#flv5#77)#nfm_1qq)^4majxe%um
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,8 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+EXTERNAL_APPS = [
     "home",
     "users",
+    'bootstrap5',
     "widget_tweaks",
     "form_tags",
     "django_extensions",
@@ -47,7 +52,10 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'cart',
 ]
+
+INSTALLED_APPS += EXTERNAL_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -116,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
@@ -127,7 +135,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 
@@ -136,9 +143,10 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = '/users/login/'
+LOGIN_URL = '/login'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
@@ -170,6 +178,6 @@ SOCIALACCOUNT_PROVIDERS = {
 
 EMAIL_USE_TLS = True  
 EMAIL_HOST = 'smtp.gmail.com'  
-EMAIL_HOST_USER = 'jay.gadhiya@gmail.com'  
-EMAIL_HOST_PASSWORD = 'J@yjash502'  
+EMAIL_HOST_USER = 'jay.gadhiya@trootech.com'  
+EMAIL_HOST_PASSWORD = 'phkw wxak xtnq tmsi'  
 EMAIL_PORT = 587  

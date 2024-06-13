@@ -1,4 +1,4 @@
-
+{% extends "base.html" %}
 {% load static %}
 <html lang="en">
 <head>
@@ -13,14 +13,17 @@
     <header>
         {% include 'navbar.html' %}
     </header>
+    {% block content %}
     <main class="container">
-        <h2>Login</h2>
+        <h2>LogIn</h2><br>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button><br><br>    
+            <a href='{% url 'password_reset' %}'>Forgot Password?</a>
         </form>
     </main>
+    {% endblock %}
     <footer>
         {% include 'footer.html' %}
     </footer>

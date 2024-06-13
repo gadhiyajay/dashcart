@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="product-details">
+                <h1 class="product-title">{{ product.title }}</h1>
+                <p class="product-description">{{ product.description }}</p>
+                <div class="product-info">
+                    <p class="product-price">Price: ₹{{ product.price }}</p>
+                    <p class="product-stock">Stock: {{ product.stock }}</p>
+                </div>
+                <div class="product-actions">
+                    {% if user.is_authenticated and request.user.profile.user_type == "buyer" %}
+                    <button class="btn btn-buy-now">
+                        <i class="fas fa-shopping-cart"></i> Buy Now
+                    </button>
+                    <button class="btn btn-add-cart">
+                        <a href=" {% url 'add_to_cart' product.id %} ">Add to Cart</a>
+                    </button>
+                    {% elif user.is_authenticated and request.user.profile.user_type == "seller" %}
+                    <a href="{% url 'edit_product' product.id %}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal-{{ product.id }}">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal-{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel-{{ product.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel-{{ product.id }}">Delete Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>{{ product.title }}</strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{% url 'delete_product' product.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .product-image {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .product-details {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+    }
+
+    .product-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .product-description {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .product-info {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .product-price,
+    .product-stock {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .product-actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-buy-now {
+        background-color: #ff5733;
+        color: #fff;
+    }
+
+    .btn-buy-now:hover {
+        background-color: #e64d26;
+    }
+
+    .btn-add-cart {
+        background-color: #3498db;
+        color: #fff;
+    }
+
+    .btn-add-cart:hover {
+        background-color: #2980b9;
+    }
+
+    .btn-warning,
+    .btn-danger {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+</style>
+{% endblock %}

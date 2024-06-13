@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<style>
+    /* Custom styles */
+    .card {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .title h3 {
+        color: #0b7a72;
+        margin-top: 0;
+    }
+
+    .label {
+        font-weight: bold;
+        color: #0b7a72;
+        margin-bottom: 5px;
+    }
+
+    .input-group-text {
+        background-color: #e9ecef;
+        border-color: #ced4da;
+        color: #495057;
+    }
+
+    .form-control {
+        border-color: #ced4da;
+    }
+
+    .btn-update {
+        background-color: #0b7a72;
+        color: white;
+        border-color: #0b7a72;
+        padding: 8px 20px;
+        margin-right: 10px;
+    }
+
+    .btn-update:hover {
+        background-color: #0a695f;
+        border-color: #0a695f;
+    }
+
+    .btn-cancel {
+        background-color: #dc3545;
+        color: white;
+        border-color: #dc3545;
+        padding: 8px 20px;
+    }
+
+    .btn-cancel:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+</style>
+<div class="card">
+    <div class="title">
+        <h3>UPDATE ADDRESS</h3>
+    </div>
+    <form method="POST" id="updateAddress">
+        {% csrf_token %}
+        {% if form.errors %}
+            {% for key, error in form.errors.items %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="mb-3">
+            <label class="label">Street</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-home"></i>
+                </span>
+                {% render_field form.street class="form-control" %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="label">Pincode</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-map-pin"></i>
+                </span>
+                {% render_field form.postal_code class="form-control" %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="label">City</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-location-dot"></i>
+                </span>
+                {% render_field form.city class="form-control" %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="label">State</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-location-dot"></i>
+                </span>
+                {% render_field form.state class="form-control" %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="label">Country</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-location-dot"></i>
+                </span>
+                {% render_field form.country class="form-control" %}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="label">Type</label>
+            {{ form.address_type | add_class:"form-control" }}
+        </div>
+        <div style="display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn btn-update">Update</button>
+            <a href="{% url 'address_list' %}"><button type="button" class="btn btn-danger">Cancel</button></a>
+
+        </div>
+    </form>
+</div>
+<br>
+{% endblock content %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}
+
+

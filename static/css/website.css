@@ -1,4 +1,5 @@
 .d-flex{
+    margin-inline: -60px !important;
     padding-top: 7px;
     display: -webkit-inline-box !important;
 }
@@ -17,11 +18,11 @@
     margin-top: 10px;
     margin-right: 0px;
     padding: 0px;
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+    overflow-x: auto; 
 }
 
 .category-item {
-    flex: 0 0 calc(10% - 20px); /* Adjusted width */
+    flex: 0 0 calc(10% - 20px);
     text-align: center;
     background-color: #f8f9fa;
     border-radius: 10px;
@@ -39,7 +40,8 @@
 
 .category-item img {
     width: 100%;
-    height: auto;
+    height: 50px;
+    object-fit: cover !important;
     transition: transform 0.3s ease;
 }
 
@@ -47,10 +49,14 @@
     transform: scale(1.1);
 }
 
+.category-item a{
+    font-size: 15px;
+}
+
 .category-item p {
     margin: 0;
     padding: 10px 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     color: #333;
     text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
@@ -65,53 +71,51 @@
 }
 
 .carousel-control-prev, .carousel-control-next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-/* Position the "next button" to the right */
 .carousel-control-next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
+    right: 0;
+    border-radius: 3px 0 0 3px;
+    }
 
-/* On hover, add a black background color with a little bit see-through */
 .carousel-control-prev:hover, .carousel-control-next:hover {
-  background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,0.8);
 
 }
 .card-deck {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping onto multiple lines */
-    overflow-x: auto; /* Enable horizontal scrolling if necessary */
-    margin-bottom: -20px; /* Remove bottom margin to prevent extra space */
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    margin-bottom: -20px;
 }
 
 .card {
     margin-top: 20px;
     margin-bottom: 20px;
-    flex: 0 0 auto; /* Prevent flex items from growing */
-    width: calc(33.333% - 20px); /* Adjusted width for each card */
-    margin-right: 20px; /* Add right margin to separate cards */
-    margin-left: 5px; /* Add right margin to separate cards */
+    flex: 0 0 auto;
+    width: calc(33.333% - 20px);
+    margin-right: 20px; 
+    margin-left: 5px; 
     border: none;
-    /* border-radius: 15px; */
+    
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 .card:last-child {
-    margin-right: 0; /* Remove right margin from last card */
+    margin-right: 0; 
 }
 
 .card:hover {
@@ -127,7 +131,7 @@
 
 
 .text-muted {
-    color: #6c757d; /* Adjust text-muted color as needed */
+    color: #6c757d; 
 }
 
 p.card-text-container{
@@ -143,4 +147,112 @@ p.card-text-container{
 .mt-1, .my-1 {
     margin-right: -190px !important;
     margin-top: .25rem !important;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.row {
+    padding-left: 35px;
+    display: -webkit-box;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+
+.carousel {
+    margin-bottom: 20px;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: auto;
+} 
+
+.custom-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 100%;
+}
+
+.custom-card:hover {
+    transform: scale(1.05);
+}
+
+.custom-card-img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.custom-card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.custom-card-text {
+    font-size: 1rem;
+    color: #555;
+}
+#product-list .btn {
+    margin: 10px 0;
+}
+/* website.css */
+.custom-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.custom-card .card-body {
+    text-align: center;
+}
+
+.custom-card .card-title {
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.custom-card .card-text {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.custom-card .product-image {
+    margin-top: 1rem;
+    border-radius: 10px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/* Additional button styling if needed */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
 }

@@ -1,3 +1,18 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.models import User
+from .models import Profile, Address
 
-# Register your models here.
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    fields = ('user_type', 'gst_number')
+
+class UserAdmin(BaseUserAdmin):
+    inlines = (ProfileInline,)
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+admin.site.register(Profile)
+
+admin.site.register(Address)

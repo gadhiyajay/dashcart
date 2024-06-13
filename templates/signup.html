@@ -1,24 +1,66 @@
+{% extends 'base.html' %}
 
-{% extends 'base.html' %}  
-  
-{% block content %}  
-<div class = "container">  
-  <h2>Sign up</h2>  
-  <form method="post">  
-    {% csrf_token %}  
-      {% for field in form %}  
-      <p>  
-        {{ field.label_tag }}<br>  
-        {{ field }}  
-        {% if field.help_text %}  
-          <small style="display: none ">{{ field.help_text }}</small>  
-        {% endif %}  
-        {% for error in field.errors %}  
-          <p style="color: red">{{ error }}</p>  
-        {% endfor %}  
-      </p>  
-      {% endfor %}  
-    <button type="submit">Sign up</button>  
-  </form>  
-</div>  
-{% endblock %}  
+{% block content %}
+<div class="container">
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    
+    <!-- Render user_type field first -->
+    <p id="div_{{ form.user_type.id_for_label }}">
+      {{ form.user_type.label_tag }}<br>
+      {{ form.user_type }}
+      {% if form.user_type.help_text %}
+        <small>{{ form.user_type.help_text }}</small>
+      {% endif %}
+      {% for error in form.user_type.errors %}
+        <p style="color: red">{{ error }}</p>
+      {% endfor %}
+    </p>
+
+    <!-- Render other fields -->
+    {% for field in form %}
+      {% if field.name != 'user_type' %}
+        <p id="div_{{ field.id_for_label }}">
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.help_text %}
+            <small>{{ field.help_text }}</small>
+          {% endif %}
+          {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+          {% endfor %}
+        </p>
+      {% endif %}
+    {% endfor %}
+    
+    <button id="signup_button" type="submit">Sign up</button>
+  </form>
+</div>
+
+<script>
+  function toggleGSTField() {
+    var userType = document.getElementById('user_type').value;
+    var gstField = document.getElementById('div_gst_number');
+    var signupButton = document.getElementById('signup_button');
+
+    if (userType === 'seller') {
+        gstField.style.display = 'block';
+        signupButton.style.display = 'block';
+    } else {
+        gstField.style.display = 'none';
+        if (userType !== '') {
+            signupButton.style.display = 'block';
+        } else {
+            signupButton.style.display = 'none';
+        }
+    }
+}
+
+window.onload = function() {
+    toggleGSTField();  // Set the correct initial state
+    document.getElementById('user_type').addEventListener('change', toggleGSTField);
+};
+
+</script>
+{% endblock %}
